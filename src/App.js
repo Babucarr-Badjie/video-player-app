@@ -1,23 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import Menu from "./components/Menu";
+import Video from "./components/Video";
+// videos links
+const VIDEOS = {
+  antelopes:
+    "https://content.codecademy.com/courses/React/react_video-fast.mp4",
+  snail: "https://content.codecademy.com/courses/React/react_video-slow.mp4",
+  cat: "https://content.codecademy.com/courses/React/react_video-cute.mp4",
+  spider: "https://content.codecademy.com/courses/React/react_video-eek.mp4",
+};
 
 function App() {
+  const [videoSrc, setVideoSrc] = useState(VIDEOS.antelopes);
+
+  // handler function
+  const selectedVideoHandler = (nextVideo) => {
+    setVideoSrc(VIDEOS[nextVideo]);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Video Player</h1>
+      <Menu selectedVideo={selectedVideoHandler} />
+      <Video src={videoSrc} />
     </div>
   );
 }
